@@ -22,14 +22,28 @@ namespace WebProducts.Controllers
         [HttpGet("GetCategory")]
         public IActionResult GetCategory()
         {
-            return Ok(_context.Categories.OrderBy(x => x.Name).ToList());
+            try
+            {
+                return Ok(_context.Categories.OrderBy(x => x.Name).ToList());
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
 
         [HttpGet("GetCategory/{id}")]
         public IActionResult GetCategory(int id)
         {
-            return Ok(_context.Categories.FirstOrDefault(x=>x.Id == id));
+            try
+            {
+                return Ok(_context.Categories.FirstOrDefault(x => x.Id == id));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPost("Save")]
